@@ -2,12 +2,7 @@
 using ServiceStack;
 using ServiceStack.Auth;
 using ServiceStack.Authentication.OAuth2;
-using ServiceStack.Authentication.OAuth2.Me;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoogleAuthPlugin
 {
@@ -30,7 +25,7 @@ namespace GoogleAuthPlugin
             }
 
             appHost.Plugins.Add(new AuthFeature(() => new AuthUserSession(), new IAuthProvider[] {
-                        new GoogleOAuth2ProviderMe(appSettings),
+                        new GoogleOAuth2Provider(appSettings),
                     }, oauthLogin));
         }
     }
