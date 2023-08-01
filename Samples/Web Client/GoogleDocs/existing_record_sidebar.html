@@ -40,7 +40,7 @@
        <span class="gray">Number: </span><span id="record-number"></span>
     </div>    
     <div class="block">
-      <span class="gray">Document is in CM: </span><span id="in-cm"></span>
+      <span class="gray">Document is in Ingress Records: </span><span id="in-cm"></span>
     </div>
     <div class="block">
       <span class="gray">Edit status: </span><span id="edit-status"></span>
@@ -52,9 +52,9 @@
     </div>
     
     <div style="margin-top:16px">
-       <a id="open-record-btn" class="button disabled" target="_blank">Open in CM </a>
+       <a id="open-record-btn" class="button disabled" target="_blank"> Open in Ingress Records </a>
        
-       <button id="checkin" disabled class="button action">Check In</button>
+       <button id="checkin" disabled class="button action"> Check In </button>
     </div>
     
     <h1 class="block">Make Final</h1>
@@ -63,7 +63,7 @@
   <input type="checkbox" name="remove-revisions" id="remove-revisions">
   <label for="radio1">Remove previous revisions</label>
   <div style="margin-top:16px">
-   <button id="make-final" disabled class="button">Make Final</button>
+   <button id="make-final" disabled class="button"> Make Final </button>
    </div>
 </div>
 </div>
@@ -89,7 +89,7 @@
                   writeFields(recordDetails);
 
                  $('#open-record-btn')
-                   .attr("href", "https://mfcm.info/hpecontentmanager?q=uri:" + recordDetails.Uri + "&t=Record")
+                   .attr("href", "https://test-cm101-workspace.icognition.cloud/Search?Query=uri:" + recordDetails.Uri + "&LaunchPreview=" + recordDetails.Uri)
                    .removeClass('disabled');
 
                  if (recordDetails.EnabledCommandIds.includes('RecCheckIn')) {
