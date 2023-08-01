@@ -69,7 +69,7 @@
 </div>
     <div class="sidebar bottom">
       <!--img alt="Add-on logo" class="logo" src="https://www.gstatic.com/images/branding/product/1x/translate_48dp.png" width="27" height="27"-->
-      <span class="gray branding-text">Content Manager</span>
+      <span class="gray branding-text">Ingress Records</span>
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -147,7 +147,7 @@
          $('#record-number').text(recordDetails.RecordNumber.Value);
          $('#in-cm').text(recordDetails.RecordIsElectronic.StringValue);
          $('#revisions').text(recordDetails.RecordRevisionCount.StringValue);
-         $('#edit-status').text(recordDetails.RecordDocumentStatus.StringValue);
+         $('#edit-status').text(recordDetails.RecordEditState.StringValue);
          
          if (!recordDetails.EnabledCommandIds.includes('RecCheckIn')) {
              $('#checkin').prop('disabled', true);
@@ -162,5 +162,3 @@
     </script>
   </body>
 </html>
-
-

@@ -1,7 +1,7 @@
-var BASE_URL = 'https://mfcm.info';
-var SERVICE_URL = BASE_URL + '/HPECMServiceAPI/';
+var BASE_URL = 'https://cm101-wgs-1.icognition.cloud';
+var SERVICE_URL = BASE_URL + '/CMServiceAPI/';
 
-var DETAILS_PROPERTIES = "RecordNumber,RecordIsElectronic,RecordRevisionCount,RecordDocumentStatus,EnabledCommandIds";
+var DETAILS_PROPERTIES = "RecordNumber,RecordIsElectronic,RecordRevisionCount,RecordEditState,EnabledCommandIds";
 
 function getSessionId(refresh) {
   var cache = CacheService.getUserCache();
@@ -12,7 +12,7 @@ function getSessionId(refresh) {
   }
   
    var accessToken = ScriptApp.getOAuthToken();
-   var url = SERVICE_URL + 'auth/GoogleOAuthApp?format=json&accesstoken=' + accessToken;
+   var url = SERVICE_URL + 'auth/GoogleOAuth?format=json&accesstoken=' + accessToken;
   
    var response = UrlFetchApp.fetch(url, {
      method: 'GET'
@@ -91,7 +91,7 @@ function getJSON(url, tryAgain) {
 function onOpen(e) {  
 
   DocumentApp.getUi().createAddonMenu()
-      .addItem('Start', 'showSidebar')
+      .addItem('Launch sidebar', 'showSidebar')
       .addToUi();
 
 }
@@ -151,7 +151,7 @@ function showSidebar() {
   
 
   var ui = HtmlService.createHtmlOutputFromFile(sidebarName)
-      .setTitle('Content Manager');
+      .setTitle('Ingress Records for Google');
   DocumentApp.getUi().showSidebar(ui);
   
 
@@ -170,7 +170,7 @@ function getRecordDetails() {
 function getRecordTypes() {
 
   var doc = DocumentApp.getActiveDocument();  
-  var recordTypes = getJSON('RecordType?q=rtyHasElecDocSupport&pageSize=100&ExcludeCount=true&properties=Tooltip,dataentryformdefinition');
+  var recordTypes = getJSON('RecordType?q=Ingress Google Document&pageSize=100&ExcludeCount=true&properties=Tooltip,dataentryformdefinition');
 
   for (var counter = 0; counter < recordTypes.Results.length; counter++) {
     var formDef = recordTypes.Results[counter].DataEntryFormDefinition;
