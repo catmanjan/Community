@@ -403,3 +403,5 @@ FodyWeavers.xsd
 /Samples/ServiceAPI/CSharp/GoogleAuthPlugin/obj/Debug/GoogleAuthPlugin.dll
 /Samples/ServiceAPI/CSharp/GoogleAuthPlugin/obj/Debug/GoogleAuthPlugin.pdb
 /Samples/ServiceAPI/CSharp/GoogleAuthPlugin/.vs/GoogleAuthPlugin/FileContentIndex/c82e39ff-9bd5-48c6-9c6f-8a58c1b97910.vsidx
+/Samples/ServiceAPI/CSharp/GoogleAuthPlugin/.vs/GoogleAuthPlugin/v17/TestStore/0/000.testlog
+/Samples/ServiceAPI/CSharp/GoogleAuthPlugin/obj/Debug/GoogleAuthPlugin.csproj.AssemblyReference.cache
