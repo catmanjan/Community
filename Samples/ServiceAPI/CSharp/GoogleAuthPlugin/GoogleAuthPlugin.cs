@@ -24,7 +24,7 @@ namespace GoogleAuthPlugin
             }
 
             appHost.Plugins.Add(new AuthFeature(() => new AuthUserSession(), new IAuthProvider[] {
-                        new CustomGoogleOAuth2Provider(appSettings),
+                        new GoogleAuthProvider(appSettings),
                     }, oauthLogin));
         }
     }
