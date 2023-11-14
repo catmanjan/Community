@@ -20,12 +20,23 @@ namespace GoogleAuthPlugin
 
             if (oauthLogin == null)
             {
-                oauthLogin = "~/auth/GoogleOAuth";
+                oauthLogin = "~/auth/google";
             }
 
+            /*appHost.Plugins.Add(new AuthFeature(() => new AuthUserSession(), new IAuthProvider[] {
+                        new CustomGoogleOAuth2Provider(appSettings),
+                    }, oauthLogin));*/
+
             appHost.Plugins.Add(new AuthFeature(() => new AuthUserSession(), new IAuthProvider[] {
-                        new GoogleAuthProvider(appSettings),
-                    }, oauthLogin));
+                         new GoogleAuthProvider(appSettings)
+                         {
+                             /*AuthorizeUrl = "https://accounts.google.com/o/oauth2/auth",
+                             AccessTokenUrl = "https://accounts.google.com/o/oauth2/token",
+                             UserProfileUrl = "https://www.googleapis.com/oauth2/v1/userinfo",
+                             VerifyTokenUrl = "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token={0}",*/
+                             VerifyAccessTokenAsync = null
+                         },
+                     }, oauthLogin));
         }
     }
 }

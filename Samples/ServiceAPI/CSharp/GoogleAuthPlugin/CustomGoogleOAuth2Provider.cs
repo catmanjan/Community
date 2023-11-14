@@ -10,7 +10,7 @@ namespace GoogleAuthPlugin
 {
     public class CustomGoogleOAuth2Provider : OAuth2Provider
     {
-        public const string Name = "GoogleOAuth";
+        public const string Name = "google";
 
         public const string Realm = "https://accounts.google.com/o/oauth2/auth";
 
@@ -18,7 +18,7 @@ namespace GoogleAuthPlugin
 
 
         public CustomGoogleOAuth2Provider(IAppSettings appSettings)
-            : base(appSettings, "https://accounts.google.com/o/oauth2/auth", "GoogleOAuth")
+            : base(appSettings, "https://accounts.google.com/o/oauth2/auth", "google")
         {
             AuthorizeUrl = AuthorizeUrl ?? "https://accounts.google.com/o/oauth2/auth";
             AccessTokenUrl = AccessTokenUrl ?? "https://accounts.google.com/o/oauth2/token";
