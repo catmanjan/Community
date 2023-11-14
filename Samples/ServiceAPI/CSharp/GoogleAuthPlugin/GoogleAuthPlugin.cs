@@ -1,7 +1,6 @@
 ﻿using HP.HPTRIM.Service;
 using ServiceStack;
 using ServiceStack.Auth;
-using ServiceStack.Authentication.OAuth2;
 using System.Linq;
 
 namespace GoogleAuthPlugin

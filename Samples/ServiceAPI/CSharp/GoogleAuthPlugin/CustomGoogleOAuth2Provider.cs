@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using ServiceStack;
+using ServiceStack.Auth;
 using ServiceStack.Configuration;
 using ServiceStack.Text;
 
-namespace ServiceStack.Authentication.OAuth2
+namespace GoogleAuthPlugin
 {
     public class CustomGoogleOAuth2Provider : OAuth2Provider
     {
@@ -16,25 +20,20 @@ namespace ServiceStack.Authentication.OAuth2
         public CustomGoogleOAuth2Provider(IAppSettings appSettings)
             : base(appSettings, "https://accounts.google.com/o/oauth2/auth", "GoogleOAuth")
         {
-            base.AuthorizeUrl = base.AuthorizeUrl ?? "https://accounts.google.com/o/oauth2/auth";
-            base.AccessTokenUrl = base.AccessTokenUrl ?? "https://accounts.google.com/o/oauth2/token";
-            base.UserProfileUrl = base.UserProfileUrl ?? "https://www.googleapis.com/oauth2/v1/userinfo";
-            if (base.Scopes.Length == 0)
+            AuthorizeUrl = AuthorizeUrl ?? "https://accounts.google.com/o/oauth2/auth";
+            AccessTokenUrl = AccessTokenUrl ?? "https://accounts.google.com/o/oauth2/token";
+            UserProfileUrl = UserProfileUrl ?? "https://www.googleapis.com/oauth2/v1/userinfo";
+            if (Scopes.Length == 0)
             {
-                base.Scopes = new string[2] { "https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email" };
+                Scopes = new string[2] { "https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email" };
             }
 
-            base.VerifyAccessToken = OnVerifyAccessToken;
+            VerifyTokenUrl = VerifyAccessTokenUrl;
         }
 
-        public bool OnVerifyAccessToken(string accessToken)
+        protected override Task<Dictionary<string, string>> CreateAuthInfoAsync(string accessToken, CancellationToken token = default)
         {
-            return true;
-        }
-
-        protected override Dictionary<string, string> CreateAuthInfo(string accessToken)
-        {
-            JsonObject jsonObject = JsonObject.Parse(base.UserProfileUrl.AddQueryParam("access_token", accessToken).GetJsonFromUrl());
+            JsonObject jsonObject = JsonObject.Parse(UserProfileUrl.AddQueryParam("access_token", accessToken).GetJsonFromUrl());
             return new Dictionary<string, string>
             {
                 {
@@ -85,7 +84,7 @@ namespace ServiceStack.Authentication.OAuth2
                     "profileUrl",
                     jsonObject["picture"]
                 }
-            };
+            }.AsTaskResult();
         }
     }
 }
